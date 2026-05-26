@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../hooks";
 
 const Banner = () => {
+  const { loginStatus } = useAppSelector((state) => state.auth);
+
   return (
     <div className="banner w-full flex flex-col justify-end items-center max-sm:h-[550px] max-sm:gap-2">
       <h2 className="text-white text-center text-6xl font-bold tracking-[1.86px] leading-[60px] max-sm:text-4xl max-[400px]:text-3xl">
@@ -14,9 +17,15 @@ const Banner = () => {
         <Link to="/shop" className="bg-exaltPink text-white text-center text-xl font-semibold tracking-[0.6px] w-full h-12 flex items-center justify-center">
           Shop Now
         </Link>
-        <Link to="/shop" className="text-white border-white border-2 text-center text-xl font-normal tracking-[0.6px] w-full h-12 flex items-center justify-center">
-          Voir la collection
-        </Link>
+        {loginStatus ? (
+          <Link to="/user-profile" className="text-white border-white border-2 text-center text-xl font-normal tracking-[0.6px] w-full h-12 flex items-center justify-center">
+            Mon compte
+          </Link>
+        ) : (
+          <Link to="/login" className="text-white border-white border-2 text-center text-xl font-normal tracking-[0.6px] w-full h-12 flex items-center justify-center">
+            Se connecter
+          </Link>
+        )}
       </div>
     </div>
   );
