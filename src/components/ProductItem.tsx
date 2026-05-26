@@ -8,7 +8,7 @@ const ProductItem = ({
   category,
   price,
   popularity: _popularity,
-  stock: _stock,
+  stock,
 }: {
   id: string;
   image: string;
@@ -20,12 +20,16 @@ const ProductItem = ({
 }) => {
   return (
     <div className="w-[400px] flex flex-col gap-2 justify-center max-md:w-[300px]">
-      <Link
-        to={`/product/${id}`}
-        className="w-full h-[300px] max-md:h-[200px] overflow-hidden"
-      >
-        <img src={image.startsWith("http") || image.startsWith("/") ? image : `/assets/${image}`} alt={title} className="w-full h-full object-cover" />
-      </Link>
+      <div className="relative w-full h-[300px] max-md:h-[200px] overflow-hidden">
+        <Link to={`/product/${id}`} className="w-full h-full block">
+          <img src={image.startsWith("http") || image.startsWith("/") ? image : `/assets/${image}`} alt={title} className="w-full h-full object-cover" />
+        </Link>
+        {stock === 0 && (
+          <div className="absolute top-3 left-3 bg-black text-white text-sm font-medium px-3 py-1 tracking-wide">
+            Rupture de stock
+          </div>
+        )}
+      </div>
       <Link
         to={`/product/${id}`}
         className="text-black text-center text-3xl tracking-[1.02px] max-md:text-2xl"
