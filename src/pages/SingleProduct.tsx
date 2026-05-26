@@ -121,7 +121,18 @@ const SingleProduct = () => {
             />
           </div>
           <div className="flex flex-col gap-3">
-            <Button mode="brown" text="Add to cart" onClick={handleAddToCart} />
+            <div className="flex items-center gap-2">
+              <span className={`w-2.5 h-2.5 rounded-full ${singleProduct?.stock ? "bg-green-500" : "bg-red-500"}`} />
+              <span className="text-sm font-medium">
+                {singleProduct?.stock ? "En stock" : "Rupture de stock"}
+              </span>
+            </div>
+            <Button
+              mode="brown"
+              text={singleProduct?.stock ? "Add to cart" : "Indisponible"}
+              onClick={handleAddToCart}
+              disabled={!singleProduct?.stock}
+            />
             <p className="text-secondaryBrown text-sm text-right">
               Delivery estimated on the Friday, July 26
             </p>

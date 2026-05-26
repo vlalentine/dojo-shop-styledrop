@@ -19,7 +19,7 @@ const ProductItem = ({
   stock: number;
 }) => {
   return (
-    <div className="w-[400px] flex flex-col gap-2 justify-center max-md:w-[300px]">
+    <div className={`w-[400px] flex flex-col gap-2 justify-center max-md:w-[300px] ${stock === 0 ? "opacity-60" : ""}`}>
       <div className="relative w-full h-[300px] max-md:h-[200px] overflow-hidden">
         <Link to={`/product/${id}`} className="w-full h-full block">
           <img src={image.startsWith("http") || image.startsWith("/") ? image : `/assets/${image}`} alt={title} className="w-full h-full object-cover" />
